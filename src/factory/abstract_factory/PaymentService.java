@@ -1,6 +1,6 @@
-package factory.factory_method;
+package factory.abstract_factory;
 
-import factory.factory_method.factories.PaymentFactory;
+import factory.abstract_factory.factories.PaymentFactory;
 
 
 public class PaymentService {
@@ -12,5 +12,6 @@ public class PaymentService {
 
     public void makePayment(double amount) {
         paymentFactory.createPaymentMethod().pay(amount);
+        paymentFactory.generateReceipt().generate(amount);
     }
 }

@@ -1,6 +1,6 @@
-import factory.factory_method.factories.CreditCardFactory;
-import factory.factory_method.factories.PaymentFactory;
-import factory.factory_method.PaymentService;
+import factory.abstract_factory.factories.PaypalFactory;
+import factory.abstract_factory.factories.PaymentFactory;
+import factory.abstract_factory.PaymentService;
 
 
 public class Main {
@@ -37,9 +37,14 @@ public class Main {
         service.makePayment("paypal", 85.5);
         */
 
-        /* factory method */
+        /* factory method
         PaymentFactory paymentFactory = new CreditCardFactory();
         PaymentService service = new PaymentService(paymentFactory);
         service.makePayment(150.0);
+         */
+
+        PaymentFactory paymentFactory = new PaypalFactory();
+        PaymentService service = new PaymentService(paymentFactory);
+        service.makePayment(250.0);
     }
 }

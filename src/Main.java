@@ -1,7 +1,7 @@
-import factory.abstract_factory.factories.PaypalFactory;
-import factory.abstract_factory.factories.PaymentFactory;
-import factory.abstract_factory.PaymentService;
+import singleton.PaymentLogger;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) {
@@ -43,8 +43,34 @@ public class Main {
         service.makePayment(150.0);
          */
 
+        /* abstract factory
         PaymentFactory paymentFactory = new PaypalFactory();
         PaymentService service = new PaymentService(paymentFactory);
         service.makePayment(250.0);
+        */
+
+        /* manually created thread safe signleton
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        for (int i = 1; i <= 3; i++) {
+            executor.submit(() -> {
+                ThreadSafeSingleton singleton = ThreadSafeSingleton.getInstance();
+                singleton.doSomething();
+                System.out.println("IdentityHashCode: " + System.identityHashCode(singleton) + " | Thread: " + Thread.currentThread().getName());
+            });
+        }
+        executor.shutdown();
+        */
+
+        /* enum based singleton */
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        for (int i = 1; i <= 3; i++) {
+            int id = i;
+            executor.submit(() -> {
+                PaymentLogger logger = PaymentLogger.INSTANCE;
+                logger.log("Processing payment #" + id);
+                System.out.println("IdentityHashCode: " + System.identityHashCode(logger));
+            });
+        }
+        executor.shutdown();
     }
 }

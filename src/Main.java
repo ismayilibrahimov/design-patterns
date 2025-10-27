@@ -1,7 +1,9 @@
-import singleton.PaymentLogger;
+import command.PaymentService;
+import command.commands.CaptureCommand;
+import command.commands.Command;
+import command.operations.CaptureOperation;
+import java.math.BigDecimal;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) {
@@ -61,7 +63,7 @@ public class Main {
         executor.shutdown();
         */
 
-        /* enum based singleton */
+        /* enum based singleton
         ExecutorService executor = Executors.newFixedThreadPool(3);
         for (int i = 1; i <= 3; i++) {
             int id = i;
@@ -72,5 +74,14 @@ public class Main {
             });
         }
         executor.shutdown();
+        */
+
+        /* command pattern */
+        CaptureOperation captureOperation = new CaptureOperation("5jk34j344m5k45l9", BigDecimal.valueOf(538));
+        Command captureCommand = new CaptureCommand(captureOperation);
+        PaymentService paymentService = new PaymentService();
+        paymentService.setCommand(captureCommand);
+        paymentService.processOperation();
+        paymentService.undoLastOperation();
     }
 }

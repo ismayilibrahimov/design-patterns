@@ -1,8 +1,7 @@
-import command.PaymentService;
-import command.commands.CaptureCommand;
-import command.commands.Command;
-import command.operations.CaptureOperation;
-import java.math.BigDecimal;
+import adapter.BankPaymentProcessor;
+import adapter.PaymentHandler;
+import adapter.StripePaymentAdapter;
+import adapter.StripePaymentService;
 
 
 public class Main {
@@ -76,12 +75,20 @@ public class Main {
         executor.shutdown();
         */
 
-        /* command pattern */
+        /* command pattern
         CaptureOperation captureOperation = new CaptureOperation("5jk34j344m5k45l9", BigDecimal.valueOf(538));
         Command captureCommand = new CaptureCommand(captureOperation);
         PaymentService paymentService = new PaymentService();
         paymentService.setCommand(captureCommand);
         paymentService.processOperation();
         paymentService.undoLastOperation();
+        */
+
+        /* adapter pattern */
+        PaymentHandler handler = new PaymentHandler(new BankPaymentProcessor());
+        handler.handlePayment(150.0);
+
+        PaymentHandler handler2 = new PaymentHandler(new StripePaymentAdapter(new StripePaymentService()));
+        handler2.handlePayment(150.0);
     }
 }

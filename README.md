@@ -16,6 +16,7 @@ Every week, a new design pattern will be added with a short, focused example.
 - Observer
 - Singleton
 - Factory
+- Facade
 
 ---
 

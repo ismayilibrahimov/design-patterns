@@ -1,7 +1,4 @@
-import adapter.BankPaymentProcessor;
-import adapter.PaymentHandler;
-import adapter.StripePaymentAdapter;
-import adapter.StripePaymentService;
+import facade.PaymentFacade;
 
 
 public class Main {
@@ -84,11 +81,18 @@ public class Main {
         paymentService.undoLastOperation();
         */
 
-        /* adapter pattern */
+        /* adapter pattern
         PaymentHandler handler = new PaymentHandler(new BankPaymentProcessor());
         handler.handlePayment(150.0);
 
         PaymentHandler handler2 = new PaymentHandler(new StripePaymentAdapter(new StripePaymentService()));
         handler2.handlePayment(150.0);
+        */
+
+
+        /* facade pattern */
+        PaymentFacade facade = new PaymentFacade("VALID_KEY");
+        facade.makePayment("1234567890123456", 500.0);
+
     }
 }

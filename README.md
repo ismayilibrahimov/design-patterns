@@ -17,6 +17,7 @@ Every week, a new design pattern will be added with a short, focused example.
 - Singleton
 - Factory
 - Facade
+- Template Method
 
 ---
 

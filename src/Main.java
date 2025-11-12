@@ -1,5 +1,5 @@
-import facade.PaymentFacade;
-
+import template_method.PaymentService;
+import template_method.PaypalPaymentService;
 
 public class Main {
     public static void main(String[] args) {
@@ -90,9 +90,13 @@ public class Main {
         */
 
 
-        /* facade pattern */
+        /* facade pattern
         PaymentFacade facade = new PaymentFacade("VALID_KEY");
         facade.makePayment("1234567890123456", 500.0);
+        */
 
+        /* template method pattern */
+        PaymentService paymentService = new PaypalPaymentService();
+        paymentService.processPayment(500);
     }
 }

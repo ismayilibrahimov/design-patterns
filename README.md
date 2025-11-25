@@ -16,6 +16,7 @@ The goal is to help developers understand the core ideas behind each pattern thr
 - Factory
 - Facade
 - Template Method
+- State
 
 ---
 

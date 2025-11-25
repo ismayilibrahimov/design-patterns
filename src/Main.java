@@ -1,5 +1,5 @@
-import template_method.PaymentService;
-import template_method.PaypalPaymentService;
+import state.PaymentContext;
+import state.PaymentService;
 
 public class Main {
     public static void main(String[] args) {
@@ -95,8 +95,14 @@ public class Main {
         facade.makePayment("1234567890123456", 500.0);
         */
 
-        /* template method pattern */
+        /* template method pattern
         PaymentService paymentService = new PaypalPaymentService();
         paymentService.processPayment(500);
+        */
+
+        PaymentContext payment = new PaymentContext("5465");
+        PaymentService paymentService = new PaymentService();
+        paymentService.handle(payment);
+        payment.getState().refund();
     }
 }

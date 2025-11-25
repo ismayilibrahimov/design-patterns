@@ -3,8 +3,6 @@
 This repository contains simple and practical examples of **Design Patterns** implemented in **Java**.  
 The goal is to help developers understand the core ideas behind each pattern through clear and minimal code examples.
 
-Every week, a new design pattern will be added with a short, focused example.
-
 ---
 
 ## 🧩 Implemented Patterns
